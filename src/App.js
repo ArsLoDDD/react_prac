@@ -27,7 +27,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Counter from './components/Counter';
-import Input from './components/Counter/Input';
 
 // class App extends Component {
 //   render() {
@@ -44,9 +43,10 @@ import Input from './components/Counter/Input';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { inputValue: "" };
-  }
+    this.state = { inputValue: "" ,
+  stepCount: 0};
 
+  }
   handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -54,21 +54,26 @@ class App extends Component {
       [name]: value,
     });
   };
-
-  render() {
+  sendInput = ()=>{
     const { inputValue } = this.state;
+    this.setState({ step: this.state.step += inputValue });
+    
+  }
+  render() {
+    const { step, inputValue } = this.state;
 
     return (
 
       <div>
-        <p>Step: {inputValue}</p>
+        <p>Step: {step}</p>
         <Counter />
         <input
+        type={Number}
           name="inputValue"
           value={inputValue}
           onChange={this.handleChange}
         />
-        <button >Send</button>
+        <button onClick={this.sendInput}>Send</button>
       </div>
     );
   }

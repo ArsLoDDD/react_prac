@@ -4,7 +4,7 @@ import Input from "./Input";
 class Counter extends Component {
   constructor(props) {
     super(props);
-    this.state = { count: 0, statusButton: true };
+    this.state = { count: 0, statusButton: true };      
   }
   addNum = () => {
     this.setState({ count: this.state.count + 1 });

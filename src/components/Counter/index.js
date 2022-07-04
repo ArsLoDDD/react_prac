@@ -7,24 +7,28 @@ class Counter extends Component {
     super(props);
     this.state = {
       currentStep: 0,
+      count: 0
     };
   }
-  stepCountHandler = () => {
-    const {currentStep} = this.state
-    this.setState((state, props) => ({
-      currentStep: state.currentStep + props.stepCount,
-    }));
-    console.log(currentStep)
+  changeCurrentStep = (newStep)=>{
+    this.setState({currentStep: newStep})
+  }
+  incrementNum = () => {
+    this.setState((state, props) => ({ count: state.count + state.currentStep }));
+  };
+  decrementNum = () => {
+    this.setState((state, props) => ({ count: state.count - state.currentStep }));
   };
   render() {
     const { currentStep, count} = this.state;
+
     return (
       <div>
-        <p onChange={this.stepCountHandler}>Count: {currentStep}</p>
+        <p>Count: {count}</p>
         <p>Step: {currentStep}</p>
         <h2>{count}</h2>
-        <CounterLogic step={1} />
-        <Input onChange={this.stepCountHandler} onClick={this.stepCountHandler}/>
+        <CounterLogic incrementNum={this.incrementNum} decrementNum={this.decrementNum}/>
+        <Input changeCurrentStep={this.changeCurrentStep}/>
       </div>
     );
   }

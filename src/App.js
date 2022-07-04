@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Counter stepCount={1} />
+        <Counter />
       </div>
     );
   }

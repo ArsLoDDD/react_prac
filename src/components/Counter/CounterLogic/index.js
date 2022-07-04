@@ -8,7 +8,7 @@ class CounterLogic extends Component {
   }
   changeButton = () => {
     this.setState({
-      statusbar: (this.state.statusButton = !this.state.statusButton),
+      statusButton: (this.state.statusButton = !this.state.statusButton),
     });
   };
   render() {

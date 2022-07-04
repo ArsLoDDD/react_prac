@@ -1,34 +1,31 @@
 import React, { Component } from "react";
+import CounterLogic from "./CounterLogic";
 import Input from "./Input";
 
 class Counter extends Component {
   constructor(props) {
     super(props);
-    this.state = { count: 0, statusButton: true };      
+    this.state = {
+      currentStep: 0,
+    };
   }
-  addNum = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-  minusNum = () => {
-    this.setState({ count: this.state.count - 1 });
-  };
-  changeButton = () => {
-    this.setState({
-      statusbar: (this.state.statusButton = !this.state.statusButton),
-    });
+  stepCountHandler = () => {
+    const {currentStep} = this.state
+    this.setState((state, props) => ({
+      currentStep: state.currentStep + props.stepCount,
+    }));
+    console.log(currentStep)
   };
   render() {
-    const { count, statusButton,inputValue } = this.state;
+    const { currentStep, count} = this.state;
     return (
-      <article>
-        <p>Count: {count}</p>
-        <p>Step: {inputValue}</p>
+      <div>
+        <p onChange={this.stepCountHandler}>Count: {currentStep}</p>
+        <p>Step: {currentStep}</p>
         <h2>{count}</h2>
-        <button onClick={statusButton ? this.addNum : this.minusNum}>
-          {statusButton ? "Add" : "Minus"}
-        </button>
-        <button onClick={this.changeButton}>Change</button>
-      </article>
+        <CounterLogic step={1} />
+        <Input onChange={this.stepCountHandler} onClick={this.stepCountHandler}/>
+      </div>
     );
   }
 }
